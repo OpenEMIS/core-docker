@@ -1,6 +1,6 @@
 # openemis-core
 
-This public repository relates to a Docker image on [Docker Hub](https://hub.docker.com/repository/docker/openemis/core/).
+This public repository relates to the official OpenEMIS Docker image on [Docker Hub](https://hub.docker.com/repository/docker/openemis/core/).
 
 ## Prerequisites
 
@@ -31,62 +31,18 @@ This public repository relates to a Docker image on [Docker Hub](https://hub.doc
 
     This configuration provides a number of architecture options:
     
-    * one or more web application (openemis core) containers
-    * database engine (mysql) as a docker container
-    * database engine (mysql) on a different server
-    * database admin (phpmyadmin) is optional
+    1. one or more web application (openemis core) containers
+    2. database engine (mysql) as a docker container
+    3. database engine (mysql) on a different server
+    4. database admin (phpmyadmin) is optional
 
-## Configuration with Rebuild
+## Configuration
 
-    The *Docker* file contains a number of configuration options that are automatically copied into the container when it is rebuilt:
+    It is highly recommended that you change the deafult MySQL username and password in the docker-compose.yaml.
     
-    # Edit the following file to change the Apache2 configuration
-    /config/apache2/apache2.conf
-
-    # Edit the following file to change the web site configuration
-    /config/apache2/000-default.conf
-
-    # Edit the following file to change the PHP configuration 
-    /config/php/php.ini
-
-    # Edit the following file to change the change the database connection details
-    /config/core/datasource.php 
-
-## Configuration without Rebuild
-
-    The *docker-compose.yaml* file contains a number of configuration options that are automatically set when the container starts:
-
-    version: "3.2"
-    services:
-      oe-application:
-        image: openemis/core:3.27.0
-        depends_on:
-          - oe-database
-        ports:
-          - "8082:80"
-        environment:
-          - MYSQL_HOST=oe-database
-          - MYSQL_USER=admin
-          - MYSQL_PASSWORD=demo
-          - MYSQL_DB=openemis_core
-      oe-database:
-        image: mysql:5.7
-        environment:
-          - MYSQL_ROOT_PASSWORD=rootpassword
-          - MYSQL_USER=admin
-          - MYSQL_PASSWORD=demo 
-          - MYSQL_DATABASE=openemis_core
-        volumes: 
-          - oe-data1:/var/lib/mysql
-          - ./config/sql/openemis-core-3-27-0.sql:/docker-entrypoint-initdb.d/openemis-core-3-27-0.sql
-      oe-admin:
-        image: phpmyadmin/phpmyadmin:4.7
-        depends_on:
-          - oe-database
-        ports:
-          - "8083:80"
-        environment:
-          - PMA_HOST=oe-database
-          - PMA_PORT=3306
-      
-  
+    To run one or more web application (openemis core) containers with a database engine (mysql) on a different server,
+    you will need to go into the container (docker exec -t [container-id] /bin/bash) and edit the database settings
+    in the following file:
+    
+    /var/www/html/core/config/datasource.php
+    
