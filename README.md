@@ -15,30 +15,40 @@ This public repository relates to the official OpenEMIS Docker image on [Docker 
 
 ## Usage
 
-    * Start:
+    * Start OpenEMIS Core at at the command prompt:
     docker-compose core up -d
+    
+    * Login to OpenEMIS Core via a web browser:
+    http://localhost:8082 (login: admin / password: demo)
 
-    * Stop:
+    * Stop OpenEMIS Core at at the command prompt:
     docker-compose core down
 
 ## Architecture
 
     This repository contains a docker-compose.yaml file that is used to launch three (3) containers:
     
-    * web application (openemis core)
-    * database engine (mysql)
-    * database admin (phpmyadmin)
+    # web application (openemis core)
+    http://localhost:8082
+    
+    # database admin (phpmyadmin)
+    http://localhost:8083
 
+    # database engine (mysql)
+    
     This configuration provides a number of architecture options:
     
-    1. one or more web application (openemis core) containers
-    2. database engine (mysql) as a docker container
-    3. database engine (mysql) on a different server
-    4. database admin (phpmyadmin) is optional
+    * one or more web application (openemis core) containers
+    * database engine (mysql) as a docker container or on a different stand alone database server
+    * database admin (phpmyadmin) is optional and can be removed/diabled in the docker-compose.yaml file if not required
 
 ## Configuration
 
-    It is highly recommended that you change the deafult MySQL username and password in the docker-compose.yaml.
+    It is highly recommended that you change the deafult MySQL username and password in the docker-compose.yaml:
+    
+    * MYSQL_ROOT_PASSWORD
+    * MYSQL_USER
+    * MYSQL_PASSWORD
     
     To run one or more web application (openemis core) containers with a database engine (mysql) on a different server,
     you will need to go into the container (docker exec -t [container-id] /bin/bash) and edit the database settings
