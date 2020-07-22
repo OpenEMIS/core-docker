@@ -11,18 +11,29 @@ This public repository relates to the official OpenEMIS Docker image on [Docker 
 
     git clone https://github.com/OpenEMIS/core.git
     cd core
-    docker-compose core up -d
+    docker-compose up -d
 
-## Usage
+## Usage (docker-compose)
 
     * Start OpenEMIS Core at at the command prompt:
-    docker-compose core up -d
+    docker-compose up -d
     
     * Login to OpenEMIS Core via a web browser:
     http://localhost:8082 (login: admin / password: demo)
 
     * Stop OpenEMIS Core at at the command prompt:
-    docker-compose core down
+    docker-compose down
+    
+## Usage (docker)
+
+    * Start OpenEMIS Core at at the command prompt:
+    docker run --name openemis-core -p 8082:80 -e OE_HOST=... -e OE_PORT=... -e OE_USERNAME=... -e OE_PASSWORD=... -e OE_DATABASE=... -d openemis/core:latest 
+    
+    * Login to OpenEMIS Core via a web browser:
+    http://localhost:8082 (login: admin / password: demo)
+
+    * Stop OpenEMIS Core at at the command prompt:
+    docker stop <container-id>    
 
 ## Architecture
 
@@ -42,22 +53,22 @@ This public repository relates to the official OpenEMIS Docker image on [Docker 
     * database engine (mysql) as a docker container or on a different stand alone database server
     * database admin (phpmyadmin) is optional and can be removed/diabled in the docker-compose.yaml file if not required
 
-## Configuration
+## Configuration (docker-compose)
 
     It is highly recommended that you change the deafult MySQL username and password in the docker-compose.yaml:
     
-    * MYSQL_ROOT_PASSWORD
-    * MYSQL_USER
-    * MYSQL_PASSWORD
+      - MYSQL_ROOT_PASSWORD=...
+      - MYSQL_USER=...
+      - MYSQL_PASSWORD=...
     
     To run one or more web application containers (openemis core) with a database engine (mysql) 
     on a different server you will need to change the following environment variables in the
     docker-compose.yaml file:
     
     environment:
-      - OE_HOST=localhost
-      - OE_PORT=3306 
-      - OE_USERNAME=admin
-      - OE_PASSWORD=demo
-      - OE_DATABASE=openemis_core
+      - OE_HOST=...
+      - OE_PORT=... 
+      - OE_USERNAME=...
+      - OE_PASSWORD=...
+      - OE_DATABASE=...
       
