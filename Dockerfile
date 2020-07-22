@@ -23,11 +23,15 @@ COPY ./config/php/php.ini $PHP_INI_DIR/php.ini
 # Copy in the PHP application files
 COPY ./core /var/www/html/core
 
-# Copy in the PHP application file
-COPY ./config/core/datasource.php /var/www/html/core/config
+# Copy in the docker entrypoint file
+COPY ./config/docker/docker-entrypoint.sh /var/www/html
 
 # Copy in the index.html to the root that redirects to the /core directory
-COPY ./index.html /var/www/html
+COPY ./config/html/index.html /var/www/html
 
 # Grant permissions for the web directory to be executable
 RUN chmod -R ugo+rwx /var/www/html
+
+ENTRYPOINT ["/var/www/html/docker-entrypoint.sh"]
+
+CMD ["apache2-foreground"]
