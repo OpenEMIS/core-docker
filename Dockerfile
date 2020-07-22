@@ -20,8 +20,11 @@ COPY ./config/apache2/000-default.conf /etc/apache2/sites-enabled/000-default.co
 # Copy in the PHP configuration file
 COPY ./config/php/php.ini $PHP_INI_DIR/php.ini
 
-# Copy in the PHP application files
+# Copy in the OpenEMIS Core application files
 COPY ./core /var/www/html/core
+
+# Copy in the OpenEMIS Core configuration file
+COPY ./config/core/datasource.php /var/www/html/core/config
 
 # Copy in the docker entrypoint file
 COPY ./config/docker/docker-entrypoint.sh /var/www/html
