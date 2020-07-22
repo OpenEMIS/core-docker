@@ -50,9 +50,14 @@ This public repository relates to the official OpenEMIS Docker image on [Docker 
     * MYSQL_USER
     * MYSQL_PASSWORD
     
-    To run one or more web application (openemis core) containers with a database engine (mysql) on a different server,
-    you will need to go into the container (docker exec -t [container-id] /bin/bash) and edit the database settings
-    in the following file:
+    To run one or more web application containers (openemis core) with a database engine (mysql) 
+    on a different server you will need to change the following environment variables in the
+    docker-compose.yaml file:
     
-    /var/www/html/core/config/datasource.php
-    
+    environment:
+      - OE_HOST=localhost
+      - OE_PORT=3306 
+      - OE_USERNAME=admin
+      - OE_PASSWORD=demo
+      - OE_DATABASE=openemis_core
+      
