@@ -7,10 +7,11 @@ services:
     ports:
       - "8082:80"
     environment:
-      - MYSQL_HOST=oe-database
-      - MYSQL_USER=admin
-      - MYSQL_PASSWORD=demo
-      - MYSQL_DB=openemis_core
+      - OE_HOST=oe-database
+      - OE_PORT=3306 
+      - OE_USERNAME=admin
+      - OE_PASSWORD=demo
+      - OE_DATABASE=openemis_core
   oe-database:
     image: mysql:5.7
     environment:
