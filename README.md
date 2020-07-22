@@ -7,23 +7,16 @@ This public repository relates to the official OpenEMIS Docker image on [Docker 
     * Install [Docker](https://www.docker.com/)
     * Install [Docker Compose](https://docs.docker.com/compose/install/)
 
-## Installation
+## Installation (docker)
+
+    docker pull openemis/core
+
+## Installation (docker-compose)
 
     git clone https://github.com/OpenEMIS/core.git
     cd core
     docker-compose up -d
 
-## Usage (docker-compose)
-
-    * Start OpenEMIS Core at at the command prompt:
-    docker-compose up -d
-    
-    * Login to OpenEMIS Core via a web browser:
-    http://localhost:8082 (login: admin / password: demo)
-
-    * Stop OpenEMIS Core at at the command prompt:
-    docker-compose down
-    
 ## Usage (docker)
 
     * Start OpenEMIS Core at at the command prompt:
@@ -38,7 +31,18 @@ This public repository relates to the official OpenEMIS Docker image on [Docker 
     * Stop OpenEMIS Core at at the command prompt:
     docker stop <container-id>    
 
-## Architecture
+## Usage (docker-compose)
+
+    * Start OpenEMIS Core at at the command prompt:
+    docker-compose up -d
+    
+    * Login to OpenEMIS Core via a web browser:
+    http://localhost:8082 (login: admin / password: demo)
+
+    * Stop OpenEMIS Core at at the command prompt:
+    docker-compose down
+    
+## Architecture (docker-compose)
 
     This repository contains a docker-compose.yaml file that is used to launch three (3) containers:
     
