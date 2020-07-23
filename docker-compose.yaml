@@ -21,7 +21,7 @@ services:
       - MYSQL_DATABASE=openemis_core
     volumes: 
       - oe-data:/var/lib/mysql
-      - ./config/sql/openemis-core-3-27-0.sql:/docker-entrypoint-initdb.d/openemis-core-3-27-0.sql
+      - ./config/sql/prd_cor_dmo.sql:/docker-entrypoint-initdb.d/prd_cor_dmo.sql
     command: mysqld --sql_mode="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
   oe-admin:
     image: phpmyadmin/phpmyadmin:4.7
