@@ -1,6 +1,12 @@
 # openemis-core
 
-This public repository relates to the official OpenEMIS Docker image on [Docker Hub](https://hub.docker.com/repository/docker/openemis/core/).
+The official OpenEMIS Core (community) Docker image and associated docker-compose files can be downloaded from the following locations:
+ 
+OpenEMIS Github:
+https://github.com/OpenEMIS
+ 
+OpenEMIS Docker Hub:
+https://hub.docker.com/u/openemis
 
 ## Prerequisites
 
