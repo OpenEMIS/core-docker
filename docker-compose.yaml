@@ -1,0 +1,42 @@
+version: "3.2"
+services:
+  oe-application:
+    image: core:3.27.0
+    environment:
+      - OE_DATABASE_HOST=oe-database
+      - OE_DATABASE_PORT=3306
+      - OE_DATABASE_USERNAME=admin
+      - OE_DATABASE_PASSWORD=demo
+      - OE_DATABASE_SCHEMA=openemis_core
+      - OE_EMAIL_HOST=localhost
+      - OE_EMAIL_PORT=25
+      - OE_EMAIL_USERNAME=admin
+      - OE_EMAIL_PASSWORD=demo
+      - OE_EMAIL_ADDRESS=noreply@openemis.org
+    depends_on:
+      - oe-database
+    ports:
+      - "8082:80"
+  oe-database:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=demo 
+      - MYSQL_DATABASE=openemis_core
+    volumes: 
+      - oe-data:/var/lib/mysql
+      - ./config/sql/prd_cor_dmo.sql:/docker-entrypoint-initdb.d/prd_cor_dmo.sql
+    command: mysqld --sql_mode="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+  oe-admin:
+    image: phpmyadmin/phpmyadmin:4.7
+    depends_on:
+      - oe-database
+    ports:
+      - "8083:80"
+    environment:
+      - PMA_HOST=oe-database
+      - PMA_PORT=3306
+volumes: 
+  oe-data:
+    driver: local
