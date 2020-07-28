@@ -26,6 +26,9 @@ COPY ./core /var/www/html/core
 # Copy in the OpenEMIS Core configuration file
 COPY ./config/core/datasource.php /var/www/html/core/config
 
+# Copy in the OpenEMIS Core configuration file
+COPY ./config/core/app_extra.php /var/www/html/core/config
+
 # Copy in the docker entrypoint file
 COPY ./config/docker/docker-entrypoint.sh /var/www/html
 
@@ -38,3 +41,4 @@ RUN chmod -R ugo+rwx /var/www/html
 ENTRYPOINT ["/var/www/html/docker-entrypoint.sh"]
 
 CMD ["apache2-foreground"]
+

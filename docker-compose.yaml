@@ -1,17 +1,22 @@
 version: "3.2"
 services:
   oe-application:
-    image: openemis/core:3.27.0
+    image: core:3.27.0
+    environment:
+      - OE_DATABASE_HOST=oe-database
+      - OE_DATABASE_PORT=3306
+      - OE_DATABASE_USERNAME=admin
+      - OE_DATABASE_PASSWORD=demo
+      - OE_DATABASE_SCHEMA=openemis_core
+      - OE_EMAIL_HOST=localhost
+      - OE_EMAIL_PORT=25
+      - OE_EMAIL_USERNAME=admin
+      - OE_EMAIL_PASSWORD=demo
+      - OE_EMAIL_ADDRESS=noreply@openemis.org
     depends_on:
       - oe-database
     ports:
       - "8082:80"
-    environment:
-      - OE_HOST=oe-database
-      - OE_PORT=3306 
-      - OE_USERNAME=admin
-      - OE_PASSWORD=demo
-      - OE_DATABASE=openemis_core
   oe-database:
     image: mysql:5.7
     environment:
