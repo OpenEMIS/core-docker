@@ -2,6 +2,7 @@ version: "3.2"
 services:
   oe-application:
     image: openemis/core:3.27.0
+    restart: always
     environment:
       - OE_DATABASE_HOST=oe-database
       - OE_DATABASE_PORT=3306
@@ -19,6 +20,7 @@ services:
       - "8082:80"
   oe-database:
     image: mysql:5.7
+    restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=rootpassword
       - MYSQL_USER=admin
@@ -30,6 +32,7 @@ services:
     command: mysqld --sql_mode="STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
   oe-admin:
     image: phpmyadmin/phpmyadmin:4.7
+    restart: always
     depends_on:
       - oe-database
     ports:
